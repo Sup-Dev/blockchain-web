@@ -1,32 +1,15 @@
-// var Blockchain = require('../services/blockchain');
+module.exports = async function block (req, res) {
 
-module.exports = {
-
-
-  friendlyName: 'View block',
-
-
-  description: 'Display "Block" page.',
-
-
-  exits: {
-
-    success: {
-      viewTemplatePath: 'pages/block'
-    }
-
-  },
-
-
-  fn: async function () {
+    var id = req.param('id');
+    var data;
     var BlockChain = require('../services/blockchain');
 
-    var blockTest = new BlockChain.Blockchain();
-    blockTest.test();
-    // Respond with view.
-    return {};
+    var currentBlockchain = new BlockChain.Blockchain();
 
-  }
+    currentBlockchain.getBlock(id).then((result) => {
+      console.log(result);
+      data = result;
+      return res.json(result);
+    });
 
-
-};
+}

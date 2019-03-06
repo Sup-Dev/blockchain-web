@@ -31,7 +31,7 @@ class LevelSandbox {
             self.db.put(key, value, function(err) {
                 if (err) return console.log('Not found!', err);
             })
-            resolve("Added Block: " + key);
+            resolve(value);
         });
     }
 

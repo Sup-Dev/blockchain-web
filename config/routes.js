@@ -21,6 +21,7 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
   'GET /block/:id': { action: 'view-block' },
+  'POST /block': { action: 'view-create-block' },
 
   /***************************************************************************
   *                                                                          *

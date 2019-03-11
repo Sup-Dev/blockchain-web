@@ -24,7 +24,6 @@ class Blockchain {
         // Add your code here
         this.getBlockHeight().then((height) => {
             if (height == 0) {
-                console.log("test in", height);
                 let genesisBlock = new Block.Block("Genesis Block");
 
                 genesisBlock.height = 0;
@@ -45,12 +44,9 @@ class Blockchain {
     // Add new block
     addBlock(block) {
         // Add your code here
-        // console.log("Adding block");
         return this.getBlockHeight().then((height) => {
             return this.getBlock(height);
         }).then(previousBlock => {
-            // previousBlock =  JSON.parse(previousBlock)
-            // console.log("prev", previousBlock.height);
             block.height = previousBlock.height + 1;
             block.time = new Date().getTime().toString().slice(0, -3);
             block.hash = SHA256(JSON.stringify(block)).toString();

@@ -20,8 +20,8 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  'GET /block/:id': { action: 'view-block' },
-  'POST /block': { action: 'view-create-block' },
+  'GET /block/:id': { controller: 'BlockController', action: 'read' },
+  'POST /block': { controller: 'BlockController', action: 'create' },
 
   /***************************************************************************
   *                                                                          *

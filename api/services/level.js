@@ -17,7 +17,10 @@ class LevelSandbox {
         return new Promise(function(resolve, reject) {
             // Add your code here, remember in Promises you need to resolve() or reject()
             self.db.get(key, function(err, value) {
-                if (err) return console.log('Not found!', err);
+                if (err)  {
+                  resolve({"error": "Invalid block number"});
+                  return console.log('Not found!', err);
+                }
                 resolve(JSON.parse(value));
             })
         });
@@ -29,9 +32,12 @@ class LevelSandbox {
         return new Promise(function(resolve, reject) {
             // Add your code here, remember in Promises you need to resolve() or reject()
             self.db.put(key, value, function(err) {
-                if (err) return console.log('Not found!', err);
+                if (err) {
+                  resolve({"error": "Couldn't add block"});
+                  return console.log('Not found!', err);
+                }
+                resolve(value);
             })
-            resolve(value);
         });
     }
 
@@ -46,12 +52,10 @@ class LevelSandbox {
                 i++;
             })
             .on('error', function (err) {
-                reject(err)
+                reject(err);
             })
             .on('close', function () {
-                if (i == 0) i=1;
-                // console.log(i, i-1);
-                resolve(i-1);
+                resolve(i > 0 ? (i - 1) : 0);
             });
         });
     }
